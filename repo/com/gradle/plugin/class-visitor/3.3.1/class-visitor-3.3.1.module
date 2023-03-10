@@ -1,0 +1,87 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.gradle.plugin",
+    "module": "class-visitor",
+    "version": "3.3.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.5"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "files": [
+        {
+          "name": "class-visitor-3.3.1.jar",
+          "url": "class-visitor-3.3.1.jar",
+          "size": 43821,
+          "sha512": "352ece783f5888572d2540454e8836277f0facce90fcdbf045fe6e93eccfc03330f1b63d2c7b5bc71a5fd7f51e18003e74fd02886b8c0691275cf3114501aefe",
+          "sha256": "602265ad551166110540babf96cc5a9972e415223795585232bde4e2ea5537cf",
+          "sha1": "650b18bc126a34f38c714f3c7e381f36515ea0d3",
+          "md5": "b6282220a16904fa61551e83294b9c8a"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.ow2.asm",
+          "module": "asm-util",
+          "version": {
+            "requires": "9.2"
+          }
+        },
+        {
+          "group": "org.ow2.asm",
+          "module": "asm-commons",
+          "version": {
+            "requires": "9.2"
+          }
+        },
+        {
+          "group": "org.json",
+          "module": "json",
+          "version": {
+            "requires": "20210307"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "class-visitor-3.3.1.jar",
+          "url": "class-visitor-3.3.1.jar",
+          "size": 43821,
+          "sha512": "352ece783f5888572d2540454e8836277f0facce90fcdbf045fe6e93eccfc03330f1b63d2c7b5bc71a5fd7f51e18003e74fd02886b8c0691275cf3114501aefe",
+          "sha256": "602265ad551166110540babf96cc5a9972e415223795585232bde4e2ea5537cf",
+          "sha1": "650b18bc126a34f38c714f3c7e381f36515ea0d3",
+          "md5": "b6282220a16904fa61551e83294b9c8a"
+        }
+      ]
+    }
+  ]
+}

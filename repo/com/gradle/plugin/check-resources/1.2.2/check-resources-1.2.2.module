@@ -1,0 +1,82 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.gradle.plugin",
+    "module": "check-resources",
+    "version": "1.2.2",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.5"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk8",
+          "version": {
+            "requires": "1.6.10"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "check-resources-1.2.2.jar",
+          "url": "check-resources-1.2.2.jar",
+          "size": 13991,
+          "sha512": "57989b65d60678407aecba6bfbc47a81343d4e91c725beabdd21b43393ee5e09be3d0a384ffd2b301c2c35b1cded197a9f87a4033c261bf493de6ebeedcc60f7",
+          "sha256": "babb4b3934bbdb2b5e71410c03781cdd2754656fdad6eca2c7d7b303af727bb2",
+          "sha1": "e6b2f987e6ef29d8492e2d09eb39a8526decdc29",
+          "md5": "f136590234ad9609c5c2c38e6bd58396"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk8",
+          "version": {
+            "requires": "1.6.10"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "check-resources-1.2.2.jar",
+          "url": "check-resources-1.2.2.jar",
+          "size": 13991,
+          "sha512": "57989b65d60678407aecba6bfbc47a81343d4e91c725beabdd21b43393ee5e09be3d0a384ffd2b301c2c35b1cded197a9f87a4033c261bf493de6ebeedcc60f7",
+          "sha256": "babb4b3934bbdb2b5e71410c03781cdd2754656fdad6eca2c7d7b303af727bb2",
+          "sha1": "e6b2f987e6ef29d8492e2d09eb39a8526decdc29",
+          "md5": "f136590234ad9609c5c2c38e6bd58396"
+        }
+      ]
+    }
+  ]
+}

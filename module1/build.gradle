@@ -1,0 +1,10 @@
+apply from: '../library-android.gradle'
+
+android {
+    namespace 'com.example.module1'
+}
+
+
+dependencies {
+    compileOnly 'androidx.fragment:fragment:1.0.0'
+}

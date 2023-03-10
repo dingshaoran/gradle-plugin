@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">GradlePlugin</string>
+    <string name="notification_channel_other">channelDemo</string>
+</resources>

@@ -1,0 +1,102 @@
+/**
+ * 全局注释含义
+ *
+ * 'replaceDefine'  替换方法定义 结构 {class:{method:{'invoke':[],'exclude/include':[]}}}
+ * 'replaceCall'  替换方法调用 结构 {class:{method:{'invoke':[],'exclude/include':[]}}}
+ * 'riskCheck'  查找创建类'new' 继承类'extends' 字符串'string' 结构 {type:{class/string:{'exclude/include':[]}}}
+ * class 要处理的类
+ * method 要处理的方法描述符
+ * type 类型
+ * 'invoke' 匹配到逻辑 或者 抓到异常默认返回值[类，方法名]。 参数：如果是非静态方法第一个参数为Object，其他参数与返回值与原有方法一致，如果替换方法定义原有方法实现在参数 Callable 中返回
+ * 'catch' 需要抓的异常默认Throwable
+ * 'exclude/include' 不包含的类或仅包含的类，不配置则处理所有类
+ **/
+ext {
+    visitConfig = [
+            /**
+             * 替换方法定义 包含子类
+             *{class:{method:{'invoke':[]}}}
+             */
+            'replaceDefine': ['com/visitor/DemoApplication'                     : ['attachBaseContext(Landroid/content/Context;)V': ['invoke' : ['com/visitor/utils/InjectUtils', 'attachBaseContext'],
+                                                                                                                                     'exclude': ['android/support/design/internal/ThemeEnforcement2']],],
+                              'android/support/design/internal/ThemeEnforcement': ['obtainStyledAttributes(Landroid/content/Context;Landroid/util/AttributeSet;[III[I)Landroid/content/res/TypedArray;'      : ['invoke' : ['com/visitor/utils/InjectUtils', 'obtainStyledAttributes'],
+                                                                                                                                                                                                                'exclude': ['android/support/design/internal/ThemeEnforcement2']],
+                                                                                   'obtainStyledAttributesStatic(Landroid/content/Context;Landroid/util/AttributeSet;[III[I)Landroid/content/res/TypedArray;': ['invoke' : ['com/visitor/utils/InjectUtils', 'obtainStyledAttributesStatic'],
+                                                                                                                                                                                                                'include': ['android/support/design/internal/ThemeEnforcement1', 'android/support/design/internal/ThemeEnforcement']],
+                                                                                   'obtainBoolean(Landroid/content/Context;Landroid/util/AttributeSet;[III[I)Z'                                              : ['invoke' : ['com/visitor/utils/InjectUtils', 'obtainBoolean'],
+                                                                                                                                                                                                                'include': ['android/support/design/internal/ThemeEnforcement1', 'android/support/design/internal/ThemeEnforcement']],
+                                                                                   'obtainBooleanStatic(Landroid/content/Context;Landroid/util/AttributeSet;[III[I)Z'                                        : ['invoke' : ['com/visitor/utils/InjectUtils', 'obtainBooleanStatic'],
+                                                                                                                                                                                                                'exclude': ['android/support/design/internal/ThemeEnforcement2']],
+                                                                                   'obtainLong(Landroid/content/Context;Landroid/util/AttributeSet;[III[I)J'                                                 : ['invoke' : ['com/visitor/utils/InjectUtils', 'obtainLong'],
+                                                                                                                                                                                                                'exclude': ['android/support/design/internal/ThemeEnforcement2']],
+                                                                                   'obtainLongStatic(Landroid/content/Context;Landroid/util/AttributeSet;[III[I)J'                                           : ['invoke' : ['com/visitor/utils/InjectUtils', 'obtainLongStatic'],
+                                                                                                                                                                                                                'exclude': ['android/support/design/internal/ThemeEnforcement2']],
+                                                                                   'obtainVoid(Landroid/content/Context;Landroid/util/AttributeSet;[III[I)V'                                                 : ['invoke': ['com/visitor/utils/InjectUtils', 'obtainVoid']],
+                                                                                   'obtainVoidStatic(Landroid/content/Context;Landroid/util/AttributeSet;[III[I)V'                                           : ['invoke': ['com/visitor/utils/InjectUtils', 'obtainVoidStatic']],]],
+
+            'annotation'   : ['Lcom/visitor/DemoAnno;': ['invoke' : ['com/visitor/utils/InjectUtils', 'demoAnno', '(Ljava/util/concurrent/Callable;Ljava/lang/Object;Ljava/lang/String;)V'],
+                                                         'exclude': ['android/support/design/internal/ThemeEnforcement2']],],
+
+            'replaceString': ['aaaaaaaaaaaaaaaaa': ['string' : 'abadcds',
+                                                    'invoke' : ['com/visitor/utils/InjectUtils', 'aaaaaaaaaaaaaaaaa', 'Ljava/lang/Object;'],
+                                                    'exclude': ['com/visitor/LibraryModule1']],],
+
+            /**
+             * 替换方法调用
+             *{class:{method:{'invoke':[],'exclude/include':[]}}}
+             */
+            'replaceCall'  : ['android/graphics/Bitmap'          : ['copyPixelsToBuffer(Ljava/nio/Buffer;)V': ['invoke': ['com/visitor/utils/InjectUtils', 'copyPixelsToBuffer']]],
+
+                              'okhttp3/OkHttpClient$Builder'     : ['build()Lokhttp3/OkHttpClient;': ['exclude': ['com/huawei/secure/android/common/ssl/WebViewSSLCheckThread'],
+                                                                                                      'invoke' : ['com/visitor/utils/InjectUtils', 'build']]],
+
+                              'android/location/LocationManager' : ['requestSingleUpdate(Ljava/lang/String;Landroid/location/LocationListener;Landroid/os/Looper;)V'                 : ['exclude': ['com/gradle/plugin/framework/location/SHLocationManager'],
+                                                                                                                                                                                        'invoke' : ['com/visitor/utils/InjectUtils', 'requestSingleUpdate']],
+                                                                    'requestSingleUpdate(Landroid/location/Criteria;Landroid/location/LocationListener;Landroid/os/Looper;)V'        : ['exclude': ['com/gradle/plugin/framework/location/SHLocationManager'],
+                                                                                                                                                                                        'invoke' : ['com/visitor/utils/InjectUtils', 'requestSingleUpdate']],
+                                                                    'requestLocationUpdates(Ljava/lang/String;JFLjava/util/concurrent/Executor;Landroid/location/LocationListener;)V': ['exclude': ['com/gradle/plugin/framework/location/SHLocationManager'],
+                                                                                                                                                                                        'invoke' : ['com/visitor/utils/InjectUtils', 'requestLocationUpdates']],
+                                                                    'requestLocationUpdates(Ljava/lang/String;JFLandroid/location/LocationListener;Landroid/os/Looper;)V'            : ['exclude': ['com/gradle/plugin/framework/location/SHLocationManager'],
+                                                                                                                                                                                        'invoke' : ['com/visitor/utils/InjectUtils', 'requestLocationUpdates']],
+                                                                    'requestLocationUpdates(Ljava/lang/String;JFLandroid/location/LocationListener;)V'                               : ['exclude': ['com/gradle/plugin/framework/location/SHLocationManager'],
+                                                                                                                                                                                        'invoke' : ['com/visitor/utils/InjectUtils', 'requestLocationUpdates']],],
+
+                              'android/util/Log'                 : ['i(Ljava/lang/String;Ljava/lang/String;)I'       : ['exclude': ['com/visitor/library/log/DemoLog', 'com/alipay/zoloz/a/b'],
+                                                                                                                        'invoke' : ['com/visitor/utils/InjectUtils', 'i']],
+                                                                    'd(Ljava/lang/String;Ljava/lang/String;)I'       : ['exclude': ['com/visitor/library/log/DemoLog', 'com/alipay/zoloz/a/b'],
+                                                                                                                        'invoke' : ['com/visitor/utils/InjectUtils', 'd']],
+                                                                    'v(Ljava/lang/String;Ljava/lang/String;)I'       : ['exclude': ['com/visitoor/library/log/DemoLog', 'com/alipay/zoloz/a/b'],
+                                                                                                                        'invoke' : ['com/visitor/utils/InjectUtils', 'v']],
+                                                                    'w(Ljava/lang/String;Ljava/lang/String;)I'       : ['exclude': ['com/visitor/library/log/DemoLog', 'com/alipay/zoloz/a/b'],
+                                                                                                                        'invoke' : ['com/visitor/utils/InjectUtils', 'w']],
+                                                                    'e(Ljava/lang/String;Ljava/lang/String;)I'       : ['exclude': ['com/visitor/library/log/DemoLog', 'com/alipay/zoloz/a/b'],
+                                                                                                                        'invoke' : ['com/visitor/utils/InjectUtils', 'e']],
+                                                                    'println(ILjava/lang/String;Ljava/lang/String;)I': ['exclude': ['com/visitor/library/log/DemoLog', 'com/alipay/zoloz/a/b'],
+                                                                                                                        'invoke' : ['com/visitor/utils/InjectUtils', 'println']],],
+
+                              'android/content/pm/PackageManager': ['getInstalledPackages(I)Ljava/util/List;'    : ['invoke': ['com/visitor/utils/InjectUtils', 'getInstalledPackages']],
+                                                                    'getInstalledApplications(I)Ljava/util/List;': ['invoke': ['com/visitor/utils/InjectUtils', 'getInstalledApplications']],],],
+
+            /**
+             * 检查出现的继承类、创建类、字符串，匹配到终止打包
+             *{type:{class/String:{'exclude/include':[]}}}
+             */
+            'riskCheck'    : ["extends": ['dalvik/system/DexClassLoader': ['exclude': ['com/visitor/core/entity/plugin/PluginLoader']],],
+
+                              "new"    : ['dalvik/system/DexClassLoader': ['exclude': []],],
+
+                              "string" : ['application/vnd.android.package-archive'    : ['exclude': ['com/yanzhenjie/yp_permission/install/BaseRequest']],
+                                          'android.intent.action.PACKAGE_INSTALL'      : ['exclude': []],
+                                          'android.intent.action.PACKAGE_ADDED'        : ['exclude': ['com/google/android/gms/common/GoogleApiAvailability']],
+                                          'android.intent.action.PACKAGE_REPLACED'     : ['exclude': []],
+                                          'android.intent.action.PACKAGE_REMOVED'      : ['exclude': []],
+                                          'android.intent.action.PACKAGE_FULLY_REMOVED': ['exclude': []],]]
+
+    ]
+
+    proguardConfig = ['-optimizationpasses 5'                                                                                                                                                                                                                                                                                                  : '-optimizationpasses 2',
+                      '-dontshrink'                                                                                                                                                                                                                                                                                                            : '',
+                      '-dontoptimize'                                                                                                                                                                                                                                                                                                          : '',
+                      '-keep class **.R$* {\n <fields>;\n}'                                                                                                                                                                                                                                                                                    : '',
+                      '-assumenosideeffects class android.util.Log {\n public static boolean isLoggable(java.lang.String, int);\n public static int println(...);\n public static int v(...);\n public static int i(...);\n public static int w(...);\n public static int d(...);\n public static int e(...);\n public static int wtf(...);\n}': '']
+}

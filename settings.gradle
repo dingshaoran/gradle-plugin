@@ -1,0 +1,5 @@
+include ':class-visitor'
+include ':check-resources'
+include ':proguard-filter'
+include ':app'
+include ':module1'

@@ -1,0 +1,82 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.gradle.plugin",
+    "module": "proguard-filter",
+    "version": "1.3.4",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.5"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk8",
+          "version": {
+            "requires": "1.6.10"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "proguard-filter-1.3.4.jar",
+          "url": "proguard-filter-1.3.4.jar",
+          "size": 11404,
+          "sha512": "0e66ed5ca4f731d31fc9f4bf206a9d602f868b1c33bbde3d5a56ea2a729b1bd147eb8a6687b709fd35e1e5bd4ad9422b113cfb38005a0c4ebe984873ff53cbc0",
+          "sha256": "b3b6bef2796b160ff7e2e379b8e2c6a1a1412cee9e5de450f7dd777e5014c5da",
+          "sha1": "34c4818c07737cdda9835a19ea0d09efdd0a1238",
+          "md5": "0a1db97df071575cabb1962148f681e4"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk8",
+          "version": {
+            "requires": "1.6.10"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "proguard-filter-1.3.4.jar",
+          "url": "proguard-filter-1.3.4.jar",
+          "size": 11404,
+          "sha512": "0e66ed5ca4f731d31fc9f4bf206a9d602f868b1c33bbde3d5a56ea2a729b1bd147eb8a6687b709fd35e1e5bd4ad9422b113cfb38005a0c4ebe984873ff53cbc0",
+          "sha256": "b3b6bef2796b160ff7e2e379b8e2c6a1a1412cee9e5de450f7dd777e5014c5da",
+          "sha1": "34c4818c07737cdda9835a19ea0d09efdd0a1238",
+          "md5": "0a1db97df071575cabb1962148f681e4"
+        }
+      ]
+    }
+  ]
+}

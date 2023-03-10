@@ -1,0 +1,78 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+apply from: 'transform-config.gradle'
+
+//下面两种引用方式都可以，localMaven 没有 publish 的时候都要注释掉
+
+//apply plugin: ClassVisitorPlugin
+//visitor {
+//    visit = visitConfig
+//}
+//
+//apply plugin: CheckResourcePlugin
+//checkResource {
+//    app = false
+//}
+//
+//apply plugin: ProguardFilterPlugin
+//proguardFilter {
+//    config = proguardConfig
+//}
+
+
+androidComponents {
+    onVariants(selector().all()) { variant ->
+        variant.instrumentation.transformClassesWith(com.android.visitor.factory.CopyFramesVisitorFactory.class, com.android.build.api.instrumentation.InstrumentationScope.ALL, {
+            it.visit.set(visitConfig)
+        })
+        variant.instrumentation.setAsmFramesComputationMode(com.android.build.api.instrumentation.FramesComputationMode.COPY_FRAMES)
+    }
+}
+
+afterEvaluate {
+    com.android.resource.CheckResourceTask.register(project,new CheckResourceExtension(false,true,true))
+
+    com.android.proguard.ProguardFilterTask.register(project, proguardConfig)
+}
+
+android {
+    namespace 'com.gradle.plugin.demo'
+
+    compileSdkVersion project.ext["compileSdkVersion"]
+
+    defaultConfig {
+        applicationId "com.gradle.plugin.demo"
+        versionCode 1
+        versionName "1.0"
+        minSdkVersion project.ext["minSdkVersion"]
+        targetSdkVersion project.ext["targetSdkVersion"]
+        versionCode project.ext["versionCode"]
+        versionName project.ext["versionName"]
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api 'androidx.appcompat:appcompat:1.3.0'
+    api 'com.squareup.okhttp3:okhttp:3.14.9'
+    testImplementation 'junit:junit:4.13.2'
+
+    implementation project(path: ':module1')
+    implementation "io.reactivex.rxjava3:rxjava:3.0.13"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
+}

@@ -1,0 +1,36 @@
+apply plugin: 'maven-publish'
+publishing {
+    publications {
+        release(MavenPublication) {
+
+            afterEvaluate {
+                def bundleReleaseAar = tasks.findByName("bundleReleaseAar")
+                if (bundleReleaseAar != null) {
+                    artifact(bundleReleaseAar)
+                }
+            }
+            if (components.findByName('java') != null) {
+                from components.findByName('java')
+            }
+            groupId = GROUPID
+            artifactId = project.name
+            version = project.version
+        }
+    }
+    repositories {
+        if (MAVEN_URL.startsWith("http")) {
+            maven {
+                url = MAVEN_URL
+                allowInsecureProtocol = true
+                credentials {
+                    username MAVEN_ACCOUNT_NAME
+                    password MAVEN_ACCOUNT_PWD
+                }
+            }
+        } else {
+            maven {
+                url = rootProject.file(MAVEN_URL).toURI()
+            }
+        }
+    }
+}
